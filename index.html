@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)file:///C:/Users/lexsa/Downloads/figma-claude-code-guide_1.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Figma + Claude Code - Setup Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="./Figma + Claude Code - Setup Guide_files/css2" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-top: #EEF2FF;
+    --bg-bottom: #F8F6F2;
+    --surface: #FFFFFF;
+    --surface-alt: #F0EEF8;
+    --border: rgba(0,0,0,0.09);
+    --border-strong: rgba(0,0,0,0.16);
+    --text-primary: #18171C;
+    --text-secondary: #5E5C6E;
+    --text-tertiary: #9A98A8;
+    --green-bg: #E2F5EE;
+    --green-text: #0C5E47;
+    --amber-bg: #FEF3DC;
+    --amber-text: #7A4A0A;
+    --code-bg: #F0EEF8;
+    --tab-active-bg: #18171C;
+    --tab-active-text: #F8F6FF;
+    --line-color: rgba(0,0,0,0.09);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg-top: #0F0E18;
+      --bg-bottom: #13121A;
+      --surface: #1C1B26;
+      --surface-alt: #22202E;
+      --border: rgba(255,255,255,0.07);
+      --border-strong: rgba(255,255,255,0.14);
+      --text-primary: #EEECf8;
+      --text-secondary: #9A98A8;
+      --text-tertiary: #5E5C6E;
+      --green-bg: #0A3D2A;
+      --green-text: #5DCAA5;
+      --amber-bg: #3D2A08;
+      --amber-text: #EF9F27;
+      --code-bg: #1C1A28;
+      --tab-active-bg: #EEECf8;
+      --tab-active-text: #18171C;
+      --line-color: rgba(255,255,255,0.07);
+    }
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(170deg, var(--bg-top) 0%, var(--bg-bottom) 55%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    min-height: 100vh;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 5vw, 2rem) clamp(3rem, 8vw, 6rem);
+  }
+
+  /* Hero */
+  .hero {
+    margin-bottom: 3rem;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 3px 12px;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(24px, 5.5vw, 38px);
+    font-weight: 600;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 span {
+    color: var(--text-secondary);
+  }
+
+  .hero p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 520px;
+  }
+
+  /* Prereqs */
+  .prereqs {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 3rem;
+    animation: fadeUp 0.5s 0.1s ease both;
+  }
+
+  .prereqs-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 1rem;
+  }
+
+  .prereqs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.6rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .prereq-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .prereq-item b {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .prereq-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--text-tertiary);
+    flex-shrink: 0;
+  }
+
+  .prereqs-note {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    border-top: 1px solid var(--border);
+    padding-top: 0.85rem;
+    line-height: 1.55;
+  }
+
+  /* Steps */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 0 1rem;
+    animation: fadeUp 0.45s ease both;
+  }
+
+  .step:nth-child(1) { animation-delay: 0.15s; }
+  .step:nth-child(2) { animation-delay: 0.2s; }
+  .step:nth-child(3) { animation-delay: 0.25s; }
+  .step:nth-child(4) { animation-delay: 0.3s; }
+  .step:nth-child(5) { animation-delay: 0.35s; }
+  .step:nth-child(6) { animation-delay: 0.4s; }
+  .step:nth-child(7) { animation-delay: 0.45s; }
+
+  .step-rail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2px;
+  }
+
+  .step-num {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-primary);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-connector {
+    width: 1px;
+    flex: 1;
+    background: var(--line-color);
+    margin-top: 6px;
+    min-height: 20px;
+  }
+
+  .step:last-child .step-connector { display: none; }
+
+  .step-body {
+    padding-bottom: 2.5rem;
+  }
+
+  .step-header {
+    padding-top: 6px;
+    margin-bottom: 0.75rem;
+  }
+
+  .step-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .step-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 1rem;
+  }
+
+  /* Platform tabs */
+  .platform-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 1rem;
+  }
+
+  .tab-btn {
+    font-size: 12px;
+    font-weight: 400;
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border-strong);
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+
+  .tab-btn:hover { background: var(--surface-alt); }
+
+  .tab-btn.active {
+    background: var(--tab-active-bg);
+    color: var(--tab-active-text);
+    border-color: var(--tab-active-bg);
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* Substeps */
+  .substeps { display: flex; flex-direction: column; gap: 0.75rem; }
+
+  .substep {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .substep-num {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .substep-content { flex: 1; }
+
+  .substep-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 6px;
+  }
+
+  .substep-label b { font-weight: 600; color: var(--text-primary); }
+
+  /* Code blocks */
+  .code-block {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: var(--text-primary);
+    line-height: 1.55;
+    white-space: pre;
+    overflow-x: auto;
+  }
+
+  .code-block + .code-block { margin-top: 6px; }
+
+  /* Prompt example */
+  .prompt-wrap { margin-top: 0.5rem; }
+
+  .prompt-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 5px;
+  }
+
+  .prompt-block {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--border-strong);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    white-space: pre-wrap;
+  }
+
+  .prompt-block + .prompt-block { margin-top: 6px; }
+
+  /* Tip */
+  .tip {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    background: var(--surface-alt);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    margin-top: 0.75rem;
+  }
+
+  .tip b { font-weight: 600; color: var(--text-primary); }
+
+  .tip svg { flex-shrink: 0; margin-top: 1px; opacity: 0.45; }
+
+  /* Badges */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 999px;
+    padding: 3px 10px;
+    margin-top: 0.75rem;
+  }
+
+  .badge-green {
+    color: var(--green-text);
+    background: var(--green-bg);
+  }
+
+  .badge-amber {
+    color: var(--amber-text);
+    background: var(--amber-bg);
+  }
+
+  /* Spacer */
+  .gap { height: 8px; }
+
+  .footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-tertiary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 480px) {
+    .step { grid-template-columns: 34px 1fr; gap: 0 0.75rem; }
+    .step-num { width: 28px; height: 28px; font-size: 12px; }
+    .step-title { font-size: 15px; }
+    .code-block { font-size: 12px; padding: 9px 11px; }
+    .prompt-block { font-size: 12px; }
+    .platform-tabs { flex-wrap: wrap; }
+    .prereqs { padding: 1rem 1.1rem; }
+    .step-body { padding-bottom: 2rem; }
+    .hero p { font-size: 14px; }
+    .footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <div class="tag">Setup guide</div>
+    <h1>Figma + Claude Code <span>for Product Designers</span></h1>
+    <p>Connect your Figma files to Claude Code so it can read your actual design system - layers, tokens, components - and push editable frames back into Figma.</p>
+  </div>
+
+  <div class="prereqs">
+    <div class="prereqs-label">Before you start</div>
+    <div class="prereqs-grid">
+      <div class="prereq-item"><div class="prereq-dot"></div><span><b>Claude Pro or Max</b> plan</span></div>
+      <div class="prereq-item"><div class="prereq-dot"></div><span><b>Figma Full Seat</b> plan</span></div>
+      <div class="prereq-item"><div class="prereq-dot"></div><span><b>Mac, Windows, or Linux</b></span></div>
+      <div class="prereq-item"><div class="prereq-dot"></div><span><b>Terminal</b> open and ready</span></div>
+    </div>
+    <div class="prereqs-note">The free Claude.ai plan does not include Claude Code. Some Figma MCP write features require a Dev or Full seat on a paid Figma plan.</div>
+  </div>
+
+  <div class="steps">
+
+    <!-- Step 1 -->
+    <div class="step">
+      <div class="step-rail">
+        <div class="step-num">1</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-header">
+          <div class="step-title">Install Claude Code</div>
+        </div>
+        <div class="platform-tabs">
+          <button class="tab-btn active" onclick="switchTab(this,&#39;s1-mac&#39;)">Mac / Linux</button>
+          <button class="tab-btn" onclick="switchTab(this,&#39;s1-win&#39;)">Windows</button>
+        </div>
+
+        <div class="tab-panel active" id="s1-mac">
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-num">1</div>
+              <div class="substep-content">
+                <div class="substep-label">Open Terminal and run</div>
+                <div class="code-block">curl -fsSL https://claude.ai/install.sh | bash</div>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-num">2</div>
+              <div class="substep-content">
+                <div class="substep-label">Launch it</div>
+                <div class="code-block">claude</div>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-num">3</div>
+              <div class="substep-content">
+                <div class="substep-label">Sign in with your Claude.ai account in the browser that opens.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="s1-win">
+          <div class="tip">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"></circle><path d="M8 7v4M8 5v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></path></svg>
+            <span>Windows requires <b>Git for Windows</b> installed first. Run from PowerShell or CMD - no need to run as Administrator.</span>
+          </div>
+          <div class="gap"></div>
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-num">1</div>
+              <div class="substep-content">
+                <div class="substep-label">Install Git for Windows, then open PowerShell or CMD and run</div>
+                <div class="code-block">irm https://claude.ai/install.ps1 | iex</div>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-num">2</div>
+              <div class="substep-content">
+                <div class="substep-label">Launch it</div>
+                <div class="code-block">claude</div>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-num">3</div>
+              <div class="substep-content">
+                <div class="substep-label">Sign in with your Claude.ai account in the browser that opens.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="badge badge-green">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          No Node.js or npm needed - the native installer is self-contained
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step">
+      <div class="step-rail">
+        <div class="step-num">2</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-header">
+          <div class="step-title">Connect Figma to Claude Code</div>
+        </div>
+        <p class="step-desc">This adds the Figma MCP server - the bridge that lets Claude Code read your design files and write back to Figma.</p>
+        <div class="substeps">
+          <div class="substep">
+            <div class="substep-num">1</div>
+            <div class="substep-content">
+              <div class="substep-label">In Terminal, run</div>
+              <div class="code-block">claude mcp add --scope user --transport http figma https://mcp.figma.com/mcp</div>
+            </div>
+          </div>
+          <div class="substep">
+            <div class="substep-num">2</div>
+            <div class="substep-content">
+              <div class="substep-label">Restart Claude Code</div>
+              <div class="code-block">exit</div>
+              <div class="gap"></div>
+              <div class="code-block">claude</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step">
+      <div class="step-rail">
+        <div class="step-num">3</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-header">
+          <div class="step-title">Authenticate Figma</div>
+        </div>
+        <div class="badge badge-amber">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1.5L1 10.5h10L6 1.5z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"></path><path d="M6 5v2.5M6 8.5v.25" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></path></svg>
+          Commonly missed - don't skip this step
+        </div>
+        <div class="gap"></div>
+        <div class="substeps" style="margin-top:0.75rem">
+          <div class="substep">
+            <div class="substep-num">1</div>
+            <div class="substep-content">
+              <div class="substep-label">Open available MCP servers</div>
+              <div class="code-block">/mcp</div>
+            </div>
+          </div>
+          <div class="substep">
+            <div class="substep-num">2</div>
+            <div class="substep-content">
+              <div class="substep-label">Use arrow keys to select Figma, then press Enter</div>
+            </div>
+          </div>
+          <div class="substep">
+            <div class="substep-num">3</div>
+            <div class="substep-content">
+              <div class="substep-label">A browser window opens - click <b>Allow access</b> to authorise Claude Code to connect to Figma.</div>
+            </div>
+          </div>
+        </div>
+        <div class="tip">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"></circle><path d="M8 7v4M8 5v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></path></svg>
+          <span>If you see a yellow triangle next to Figma it still needs authentication. Once done it shows as "connected" with no triangle.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step">
+      <div class="step-rail">
+        <div class="step-num">4</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-header">
+          <div class="step-title">Read your Figma file</div>
+        </div>
+        <p class="step-desc">Give Claude Code a Figma URL and it will read your layers, colors, spacing, and components.</p>
+        <div class="substeps">
+          <div class="substep">
+            <div class="substep-num">1</div>
+            <div class="substep-content">
+              <div class="substep-label">Open your Figma file in the browser and copy the URL from the address bar. On Figma Desktop: click <b>Share</b> and copy the page URL.</div>
+            </div>
+          </div>
+          <div class="substep">
+            <div class="substep-num">2</div>
+            <div class="substep-content">
+              <div class="substep-label">In Terminal, type</div>
+              <div class="prompt-wrap">
+                <div class="prompt-label">example prompt</div>
+                <div class="prompt-block">Read this file and describe the layout and components: [paste URL]</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="badge badge-green">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Claude Code now understands your design system
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="step">
+      <div class="step-rail">
+        <div class="step-num">5</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-header">
+          <div class="step-title">Build something</div>
+        </div>
+        <p class="step-desc">Prompt Claude Code as you would a developer who has read your entire design system. The more context you give, the better the output.</p>
+        <div class="prompt-wrap">
+          <div class="prompt-label">example prompts</div>
+          <div class="prompt-block">Design a login card using my design system</div>
+          <div class="prompt-block" style="margin-top:6px">Build an empty state for the dashboard using the components you found</div>
+        </div>
+        <div class="badge badge-green">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Claude Code builds and opens a preview on a local server
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 6 -->
+    <div class="step">
+      <div class="step-rail">
+        <div class="step-num">6</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-header">
+          <div class="step-title">Push to Figma</div>
+        </div>
+        <p class="step-desc">Send the result back to your Figma file as fully editable layers.</p>
+        <div class="prompt-wrap">
+          <div class="prompt-label">example prompt</div>
+          <div class="prompt-block">Push this to my Figma file: [paste figma page URL]</div>
+        </div>
+        <div class="tip">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"></circle><path d="M8 7v4M8 5v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></path></svg>
+          <span>If you just say "Push to Figma" without a URL it pushes to the first page of your file.</span>
+        </div>
+        <div class="badge badge-green">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Open Figma - new design appears as fully editable layers
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 7 -->
+    <div class="step">
+      <div class="step-rail">
+        <div class="step-num">7</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-header">
+          <div class="step-title">Copy an entire app to Figma</div>
+        </div>
+        <p class="step-desc">Point Claude Code at a running app and it will recreate it in Figma with components, variables, and styles all properly connected.</p>
+        <div class="prompt-wrap">
+          <div class="prompt-label">example prompt</div>
+          <div class="prompt-block">I want to copy the entire app to this Figma file: [paste file link].
+Make sure you create all relevant variables, components, and styles.
+All designs inside Figma should be connected at any cost.</div>
+        </div>
+        <div class="tip">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"></circle><path d="M8 7v4M8 5v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></path></svg>
+          <span>Make sure your app is running locally before sending this prompt - Claude Code needs to be able to access and read it.</span>
+        </div>
+        <div class="badge badge-green">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Figma now has all designs, components, variables, and styles
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span>Figma + Claude Code Setup Guide · 2026</span>
+    <span>G2DM · UX Team · 2026</span>
+  </div>
+
+</div>
+
+<script>
+  function switchTab(btn, id) {
+    const body = btn.closest('.step-body');
+    body.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    body.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(id).classList.add('active');
+  }
+</script>
+
+
+</body></html>
