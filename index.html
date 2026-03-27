@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-
+<!-- saved from url=(0065)file:///Users/lexsanchez/Downloads/figma-claude-code-guide_2.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Figma + Claude Code - Setup Guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com/">
 <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-<link href="./Figma + Claude Code - Setup Guide_files/css2" rel="stylesheet">
+<link href="./index_files/css2" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -106,7 +106,7 @@
     font-size: 16px;
     color: var(--text-secondary);
     line-height: 1.7;
-    max-width: 520px;
+    max-width: 100%;
   }
 
   /* Prereqs */
@@ -396,6 +396,95 @@
   /* Spacer */
   .gap { height: 8px; }
 
+  /* Common issues */
+  .issues {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.25rem;
+  }
+
+  .issues-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 1rem;
+  }
+
+  .issue {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    margin-bottom: 0.75rem;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .issue .code-block {
+    white-space: pre-wrap;
+    word-break: break-all;
+    overflow-x: visible;
+  }
+
+  .issue-trigger {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-bottom: 0.5rem;
+  }
+
+  .issue-trigger b {
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  .error-msg {
+    font-family: "DM Mono", monospace;
+    font-size: 12px;
+    color: var(--amber-text);
+    background: var(--amber-bg);
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin-bottom: 0.75rem;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .issue-fix {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 0.6rem;
+    line-height: 1.5;
+  }
+
+  .issue-fix b { font-weight: 600; color: var(--text-primary); }
+
+  .issue-note {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin: 0.5rem 0 0.6rem;
+    line-height: 1.5;
+  }
+
+  .fix-step {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+  }
+
+  .fix-step-num {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    min-width: 16px;
+    padding-top: 2px;
+  }
+
+  .fix-step-content { flex: 1; min-width: 0; }
+
   .footer {
     margin-top: 4rem;
     padding-top: 1.5rem;
@@ -433,7 +522,7 @@
 
   <div class="hero">
     <div class="tag">Setup guide</div>
-    <h1>Figma + Claude Code <span>for Product Designers</span></h1>
+    <h1>Figma + Claude Code<br><span>for product designers</span></h1>
     <p>Connect your Figma files to Claude Code so it can read your actual design system - layers, tokens, components - and push editable frames back into Figma.</p>
   </div>
 
@@ -441,7 +530,7 @@
     <div class="prereqs-label">Before you start</div>
     <div class="prereqs-grid">
       <div class="prereq-item"><div class="prereq-dot"></div><span><b>Claude Pro or Max</b> plan</span></div>
-      <div class="prereq-item"><div class="prereq-dot"></div><span><b>Figma Full Seat</b> plan</span></div>
+      <div class="prereq-item"><div class="prereq-dot"></div><span><b>Figma</b> account (free works)</span></div>
       <div class="prereq-item"><div class="prereq-dot"></div><span><b>Mac, Windows, or Linux</b></span></div>
       <div class="prereq-item"><div class="prereq-dot"></div><span><b>Terminal</b> open and ready</span></div>
     </div>
@@ -487,6 +576,50 @@
                 <div class="substep-label">Sign in with your Claude.ai account in the browser that opens.</div>
               </div>
             </div>
+          </div>
+
+          <div class="issues">
+            <div class="issues-label">Common issues</div>
+
+            <div class="issue">
+              <div class="issue-trigger">If you get:</div>
+              <div class="error-msg">Native installation exists but ~/.local/bin is not in your PATH.</div>
+              <div class="issue-fix">Run this, then try <b>claude</b> again:</div>
+              <div class="code-block">echo 'export PATH="$HOME/.local/bin:$PATH"' &gt;&gt; ~/.zshrc &amp;&amp; source ~/.zshrc</div>
+            </div>
+
+            <div class="issue">
+              <div class="issue-trigger">If you get:</div>
+              <div class="error-msg">Unable to connect to Anthropic services
+Failed to connect to api.anthropic.com: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+SSL certificate error (UNABLE_TO_GET_ISSUER_CERT_LOCALLY)</div>
+              <div class="issue-fix">You are likely behind a corporate proxy or TLS-intercepting firewall. Try these in order:</div>
+              <div class="fix-step">
+                <div class="fix-step-num">1.</div>
+                <div class="fix-step-content">
+                  <div class="issue-fix">Point Node to your system CA bundle:</div>
+                  <div class="code-block">export NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
+claude</div>
+                  <div class="issue-note">If that path doesn't exist on macOS, try:</div>
+                  <div class="code-block">export NODE_EXTRA_CA_CERTS=$(security find-certificate -a -p /Library/Keychains/System.keychain &gt; /tmp/certs.pem &amp;&amp; echo /tmp/certs.pem)
+claude</div>
+                </div>
+              </div>
+              <div class="fix-step">
+                <div class="fix-step-num">2.</div>
+                <div class="fix-step-content">
+                  <div class="issue-fix">Export the system keychain and point to it directly:</div>
+                  <div class="code-block">security export -t certs -f pemseq -k /Library/Keychains/System.keychain -o /tmp/system-certs.pem
+export NODE_EXTRA_CA_CERTS=/tmp/system-certs.pem
+claude</div>
+                </div>
+              </div>
+              <div class="tip" style="margin-top:0.6rem">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"></circle><path d="M8 7v4M8 5v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></path></svg>
+                <span>Option 1 usually solves it. If neither works, ask IT to allowlist <b>*.anthropic.com</b>. More info at <a href="https://code.claude.com/docs/en/network-config" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">code.claude.com/docs/en/network-config</a>.</span>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -718,8 +851,8 @@ All designs inside Figma should be connected at any cost.</div>
   </div>
 
   <div class="footer">
-    <span>Figma + Claude Code Setup Guide · 2026</span>
-    <span>G2DM · UX Team · 2026</span>
+    <span>Figma + Claude Code setup guide · 2026</span>
+    <span>Based on Alok's original guide · ux_alok</span>
   </div>
 
 </div>
