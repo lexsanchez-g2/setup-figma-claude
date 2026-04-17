@@ -185,6 +185,7 @@
   .step:nth-child(5) { animation-delay: 0.35s; }
   .step:nth-child(6) { animation-delay: 0.4s; }
   .step:nth-child(7) { animation-delay: 0.45s; }
+  .step:nth-child(8) { animation-delay: 0.5s; }
 
   .step-rail {
     display: flex;
@@ -668,6 +669,90 @@ claude</div>
       </div>
       <div class="step-body">
         <div class="step-header">
+          <div class="step-title">Set up auto-navigation to workspace (Optional)</div>
+        </div>
+        <p class="step-desc">Avoid trust prompts by automatically launching Claude Code in a dedicated workspace directory.</p>
+        <div class="platform-tabs">
+          <button class="tab-btn active" onclick="switchTab(this,'s2-mac')">Mac / Linux</button>
+          <button class="tab-btn" onclick="switchTab(this,'s2-win')">Windows</button>
+        </div>
+
+        <div class="tab-panel active" id="s2-mac">
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-num">1</div>
+              <div class="substep-content">
+                <div class="substep-label">Create your workspace directory</div>
+                <div class="code-block">mkdir -p ~/Desktop/claude-g2</div>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-num">2</div>
+              <div class="substep-content">
+                <div class="substep-label">Add this alias to your shell config file (<b>~/.zshrc</b> for zsh or <b>~/.bashrc</b> for bash)</div>
+                <div class="code-block">echo 'alias claude="cd ~/Desktop/claude-g2 && ~/.local/bin/claude"' >> ~/.zshrc</div>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-num">3</div>
+              <div class="substep-content">
+                <div class="substep-label">Apply the changes</div>
+                <div class="code-block">source ~/.zshrc</div>
+              </div>
+            </div>
+          </div>
+          <div class="tip">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"></circle><path d="M8 7v4M8 5v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></path></svg>
+            <span>If you use bash instead of zsh, replace <b>.zshrc</b> with <b>.bashrc</b> in the commands above.</span>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="s2-win">
+          <div class="tip">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"></circle><path d="M8 7v4M8 5v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></path></svg>
+            <span>For Windows PowerShell, you'll create a profile script that changes directory before launching Claude Code.</span>
+          </div>
+          <div class="gap"></div>
+          <div class="substeps">
+            <div class="substep">
+              <div class="substep-num">1</div>
+              <div class="substep-content">
+                <div class="substep-label">Create your workspace directory</div>
+                <div class="code-block">New-Item -ItemType Directory -Path "$env:USERPROFILE\Desktop\claude-g2" -Force</div>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-num">2</div>
+              <div class="substep-content">
+                <div class="substep-label">Add a function to your PowerShell profile</div>
+                <div class="code-block">Add-Content $PROFILE "`nfunction claude { Set-Location `"$env:USERPROFILE\Desktop\claude-g2`"; & claude.exe }"</div>
+              </div>
+            </div>
+            <div class="substep">
+              <div class="substep-num">3</div>
+              <div class="substep-content">
+                <div class="substep-label">Reload your PowerShell profile</div>
+                <div class="code-block">. $PROFILE</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="badge badge-green">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Now typing "claude" automatically navigates to your workspace
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step">
+      <div class="step-rail">
+        <div class="step-num">3</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-header">
           <div class="step-title">Connect Figma to Claude Code</div>
         </div>
         <p class="step-desc">This adds the Figma MCP server - the bridge that lets Claude Code read your design files and write back to Figma.</p>
@@ -692,10 +777,10 @@ claude</div>
       </div>
     </div>
 
-    <!-- Step 3 -->
+    <!-- Step 4 -->
     <div class="step">
       <div class="step-rail">
-        <div class="step-num">3</div>
+        <div class="step-num">4</div>
         <div class="step-connector"></div>
       </div>
       <div class="step-body">
@@ -735,10 +820,10 @@ claude</div>
       </div>
     </div>
 
-    <!-- Step 4 -->
+    <!-- Step 5 -->
     <div class="step">
       <div class="step-rail">
-        <div class="step-num">4</div>
+        <div class="step-num">5</div>
         <div class="step-connector"></div>
       </div>
       <div class="step-body">
@@ -771,10 +856,10 @@ claude</div>
       </div>
     </div>
 
-    <!-- Step 5 -->
+    <!-- Step 6 -->
     <div class="step">
       <div class="step-rail">
-        <div class="step-num">5</div>
+        <div class="step-num">6</div>
         <div class="step-connector"></div>
       </div>
       <div class="step-body">
@@ -794,10 +879,10 @@ claude</div>
       </div>
     </div>
 
-    <!-- Step 6 -->
+    <!-- Step 7 -->
     <div class="step">
       <div class="step-rail">
-        <div class="step-num">6</div>
+        <div class="step-num">7</div>
         <div class="step-connector"></div>
       </div>
       <div class="step-body">
@@ -820,10 +905,10 @@ claude</div>
       </div>
     </div>
 
-    <!-- Step 7 -->
+    <!-- Step 8 -->
     <div class="step">
       <div class="step-rail">
-        <div class="step-num">7</div>
+        <div class="step-num">8</div>
         <div class="step-connector"></div>
       </div>
       <div class="step-body">
