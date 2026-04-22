@@ -499,6 +499,46 @@
     gap: 0.5rem;
   }
 
+  /* Copy button */
+  .code-wrap {
+    position: relative;
+  }
+
+  .copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .copy-btn:hover {
+    background: var(--surface-alt);
+    border-color: var(--border-strong);
+  }
+
+  .copy-btn.copied {
+    color: var(--green-text);
+    background: var(--green-bg);
+    border-color: var(--green-bg);
+  }
+
+  .copy-btn svg {
+    width: 12px;
+    height: 12px;
+  }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -561,14 +601,38 @@
               <div class="substep-num">1</div>
               <div class="substep-content">
                 <div class="substep-label">Open Terminal and run</div>
-                <div class="code-block">curl -fsSL https://claude.ai/install.sh | bash</div>
+                <div class="code-wrap">
+
+                  <div class="code-block">curl -fsSL https://claude.ai/install.sh | bash</div>
+
+                  <button class="copy-btn" onclick="copyCode(this)">
+
+                    <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+
+                    Copy
+
+                  </button>
+
+                </div>
               </div>
             </div>
             <div class="substep">
               <div class="substep-num">2</div>
               <div class="substep-content">
                 <div class="substep-label">Launch it</div>
-                <div class="code-block">claude</div>
+                <div class="code-wrap">
+
+                  <div class="code-block">claude</div>
+
+                  <button class="copy-btn" onclick="copyCode(this)">
+
+                    <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+
+                    Copy
+
+                  </button>
+
+                </div>
               </div>
             </div>
             <div class="substep">
@@ -586,7 +650,19 @@
               <div class="issue-trigger">If you get:</div>
               <div class="error-msg">Native installation exists but ~/.local/bin is not in your PATH.</div>
               <div class="issue-fix">Run this, then try <b>claude</b> again:</div>
-              <div class="code-block">echo 'export PATH="$HOME/.local/bin:$PATH"' &gt;&gt; ~/.zshrc &amp;&amp; source ~/.zshrc</div>
+              <div class="code-wrap">
+
+                <div class="code-block">echo 'export PATH="$HOME/.local/bin:$PATH"' &gt;&gt; ~/.zshrc &amp;&amp; source ~/.zshrc</div>
+
+                <button class="copy-btn" onclick="copyCode(this)">
+
+                  <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+
+                  Copy
+
+                </button>
+
+              </div>
             </div>
 
             <div class="issue">
@@ -599,20 +675,56 @@ SSL certificate error (UNABLE_TO_GET_ISSUER_CERT_LOCALLY)</div>
                 <div class="fix-step-num">1.</div>
                 <div class="fix-step-content">
                   <div class="issue-fix">Point Node to your system CA bundle:</div>
-                  <div class="code-block">export NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
+                  <div class="code-wrap">
+
+                    <div class="code-block">export NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
 claude</div>
+
+                    <button class="copy-btn" onclick="copyCode(this)">
+
+                      <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+
+                      Copy
+
+                    </button>
+
+                  </div>
                   <div class="issue-note">If that path doesn't exist on macOS, try:</div>
-                  <div class="code-block">export NODE_EXTRA_CA_CERTS=$(security find-certificate -a -p /Library/Keychains/System.keychain &gt; /tmp/certs.pem &amp;&amp; echo /tmp/certs.pem)
+                  <div class="code-wrap">
+
+                    <div class="code-block">export NODE_EXTRA_CA_CERTS=$(security find-certificate -a -p /Library/Keychains/System.keychain &gt; /tmp/certs.pem &amp;&amp; echo /tmp/certs.pem)
 claude</div>
+
+                    <button class="copy-btn" onclick="copyCode(this)">
+
+                      <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+
+                      Copy
+
+                    </button>
+
+                  </div>
                 </div>
               </div>
               <div class="fix-step">
                 <div class="fix-step-num">2.</div>
                 <div class="fix-step-content">
                   <div class="issue-fix">Export the system keychain and point to it directly:</div>
-                  <div class="code-block">security export -t certs -f pemseq -k /Library/Keychains/System.keychain -o /tmp/system-certs.pem
+                  <div class="code-wrap">
+
+                    <div class="code-block">security export -t certs -f pemseq -k /Library/Keychains/System.keychain -o /tmp/system-certs.pem
 export NODE_EXTRA_CA_CERTS=/tmp/system-certs.pem
 claude</div>
+
+                    <button class="copy-btn" onclick="copyCode(this)">
+
+                      <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+
+                      Copy
+
+                    </button>
+
+                  </div>
                 </div>
               </div>
               <div class="tip" style="margin-top:0.6rem">
@@ -635,14 +747,38 @@ claude</div>
               <div class="substep-num">1</div>
               <div class="substep-content">
                 <div class="substep-label">Install Git for Windows, then open PowerShell or CMD and run</div>
-                <div class="code-block">irm https://claude.ai/install.ps1 | iex</div>
+                <div class="code-wrap">
+
+                  <div class="code-block">irm https://claude.ai/install.ps1 | iex</div>
+
+                  <button class="copy-btn" onclick="copyCode(this)">
+
+                    <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+
+                    Copy
+
+                  </button>
+
+                </div>
               </div>
             </div>
             <div class="substep">
               <div class="substep-num">2</div>
               <div class="substep-content">
                 <div class="substep-label">Launch it</div>
-                <div class="code-block">claude</div>
+                <div class="code-wrap">
+
+                  <div class="code-block">claude</div>
+
+                  <button class="copy-btn" onclick="copyCode(this)">
+
+                    <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+
+                    Copy
+
+                  </button>
+
+                </div>
               </div>
             </div>
             <div class="substep">
@@ -683,21 +819,57 @@ claude</div>
               <div class="substep-num">1</div>
               <div class="substep-content">
                 <div class="substep-label">Create your workspace directory</div>
-                <div class="code-block">mkdir -p ~/Desktop/claude-g2</div>
+                <div class="code-wrap">
+
+                  <div class="code-block">mkdir -p ~/Desktop/claude-g2</div>
+
+                  <button class="copy-btn" onclick="copyCode(this)">
+
+                    <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+
+                    Copy
+
+                  </button>
+
+                </div>
               </div>
             </div>
             <div class="substep">
               <div class="substep-num">2</div>
               <div class="substep-content">
                 <div class="substep-label">Add this alias to your shell config file (<b>~/.zshrc</b> for zsh or <b>~/.bashrc</b> for bash)</div>
-                <div class="code-block">echo 'alias claude="cd ~/Desktop/claude-g2 && ~/.local/bin/claude"' >> ~/.zshrc</div>
+                <div class="code-wrap">
+
+                  <div class="code-block">echo 'alias claude="cd ~/Desktop/claude-g2 && ~/.local/bin/claude"' >> ~/.zshrc</div>
+
+                  <button class="copy-btn" onclick="copyCode(this)">
+
+                    <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+
+                    Copy
+
+                  </button>
+
+                </div>
               </div>
             </div>
             <div class="substep">
               <div class="substep-num">3</div>
               <div class="substep-content">
                 <div class="substep-label">Apply the changes</div>
-                <div class="code-block">source ~/.zshrc</div>
+                <div class="code-wrap">
+
+                  <div class="code-block">source ~/.zshrc</div>
+
+                  <button class="copy-btn" onclick="copyCode(this)">
+
+                    <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+
+                    Copy
+
+                  </button>
+
+                </div>
               </div>
             </div>
           </div>
@@ -718,21 +890,57 @@ claude</div>
               <div class="substep-num">1</div>
               <div class="substep-content">
                 <div class="substep-label">Create your workspace directory</div>
-                <div class="code-block">New-Item -ItemType Directory -Path "$env:USERPROFILE\Desktop\claude-g2" -Force</div>
+                <div class="code-wrap">
+
+                  <div class="code-block">New-Item -ItemType Directory -Path "$env:USERPROFILE\Desktop\claude-g2" -Force</div>
+
+                  <button class="copy-btn" onclick="copyCode(this)">
+
+                    <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+
+                    Copy
+
+                  </button>
+
+                </div>
               </div>
             </div>
             <div class="substep">
               <div class="substep-num">2</div>
               <div class="substep-content">
                 <div class="substep-label">Add a function to your PowerShell profile</div>
-                <div class="code-block">Add-Content $PROFILE "`nfunction claude { Set-Location `"$env:USERPROFILE\Desktop\claude-g2`"; & claude.exe }"</div>
+                <div class="code-wrap">
+
+                  <div class="code-block">Add-Content $PROFILE "`nfunction claude { Set-Location `"$env:USERPROFILE\Desktop\claude-g2`"; & claude.exe }"</div>
+
+                  <button class="copy-btn" onclick="copyCode(this)">
+
+                    <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+
+                    Copy
+
+                  </button>
+
+                </div>
               </div>
             </div>
             <div class="substep">
               <div class="substep-num">3</div>
               <div class="substep-content">
                 <div class="substep-label">Reload your PowerShell profile</div>
-                <div class="code-block">. $PROFILE</div>
+                <div class="code-wrap">
+
+                  <div class="code-block">. $PROFILE</div>
+
+                  <button class="copy-btn" onclick="copyCode(this)">
+
+                    <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+
+                    Copy
+
+                  </button>
+
+                </div>
               </div>
             </div>
           </div>
@@ -761,16 +969,52 @@ claude</div>
             <div class="substep-num">1</div>
             <div class="substep-content">
               <div class="substep-label">In Terminal, run</div>
-              <div class="code-block">claude mcp add --scope user --transport http figma https://mcp.figma.com/mcp</div>
+              <div class="code-wrap">
+
+                <div class="code-block">claude mcp add --scope user --transport http figma https://mcp.figma.com/mcp</div>
+
+                <button class="copy-btn" onclick="copyCode(this)">
+
+                  <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+
+                  Copy
+
+                </button>
+
+              </div>
             </div>
           </div>
           <div class="substep">
             <div class="substep-num">2</div>
             <div class="substep-content">
               <div class="substep-label">Restart Claude Code</div>
-              <div class="code-block">exit</div>
+              <div class="code-wrap">
+
+                <div class="code-block">exit</div>
+
+                <button class="copy-btn" onclick="copyCode(this)">
+
+                  <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+
+                  Copy
+
+                </button>
+
+              </div>
               <div class="gap"></div>
-              <div class="code-block">claude</div>
+              <div class="code-wrap">
+
+                <div class="code-block">claude</div>
+
+                <button class="copy-btn" onclick="copyCode(this)">
+
+                  <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+
+                  Copy
+
+                </button>
+
+              </div>
             </div>
           </div>
         </div>
@@ -797,7 +1041,19 @@ claude</div>
             <div class="substep-num">1</div>
             <div class="substep-content">
               <div class="substep-label">Open available MCP servers</div>
-              <div class="code-block">/mcp</div>
+              <div class="code-wrap">
+
+                <div class="code-block">/mcp</div>
+
+                <button class="copy-btn" onclick="copyCode(this)">
+
+                  <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+
+                  Copy
+
+                </button>
+
+              </div>
             </div>
           </div>
           <div class="substep">
@@ -816,6 +1072,126 @@ claude</div>
         <div class="tip">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"></circle><path d="M8 7v4M8 5v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></path></svg>
           <span>If you see a yellow triangle next to Figma it still needs authentication. Once done it shows as "connected" with no triangle.</span>
+        </div>
+
+        <div class="issues">
+          <div class="issues-label">Common issues</div>
+
+          <div class="issue">
+            <div class="issue-trigger">If you get:</div>
+            <div class="error-msg">Error: Request failed with status code 403</div>
+            <div class="issue-fix">This means your Figma authentication has expired or wasn't completed properly. Follow these steps:</div>
+            <div class="fix-step">
+              <div class="fix-step-num">1.</div>
+              <div class="fix-step-content">
+                <div class="issue-fix">Restart Claude Code completely:</div>
+                <div class="code-wrap">
+                  <div class="code-block">exit</div>
+                  <button class="copy-btn" onclick="copyCode(this)">
+                    <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+                    Copy
+                  </button>
+                </div>
+                <div class="code-wrap">
+                  <div class="code-block">claude</div>
+                  <button class="copy-btn" onclick="copyCode(this)">
+                    <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+                    Copy
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="fix-step">
+              <div class="fix-step-num">2.</div>
+              <div class="fix-step-content">
+                <div class="issue-fix">Re-authenticate Figma:</div>
+                <div class="code-wrap">
+                  <div class="code-block">/mcp</div>
+                  <button class="copy-btn" onclick="copyCode(this)">
+                    <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+                    Copy
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="fix-step">
+              <div class="fix-step-num">3.</div>
+              <div class="fix-step-content">
+                <div class="issue-fix">Select Figma and press Enter, then click <b>Allow access</b> in the browser window that opens.</div>
+              </div>
+            </div>
+            <div class="fix-step">
+              <div class="fix-step-num">4.</div>
+              <div class="fix-step-content">
+                <div class="issue-fix">Try your Figma request again.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="issue">
+            <div class="issue-trigger">If you get:</div>
+            <div class="error-msg">Error: spawn UNKNOWN (code 77)</div>
+            <div class="issue-fix">This is a Figma MCP server process error. It means the server couldn't start properly. Try these steps in order:</div>
+            <div class="fix-step">
+              <div class="fix-step-num">1.</div>
+              <div class="fix-step-content">
+                <div class="issue-fix">Clear the Figma MCP server cache and restart:</div>
+                <div class="code-wrap">
+                  <div class="code-block">rm -rf ~/.claude/mcp-servers/figma</div>
+                  <button class="copy-btn" onclick="copyCode(this)">
+                    <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+                    Copy
+                  </button>
+                </div>
+                <div class="code-wrap">
+                  <div class="code-block">exit</div>
+                  <button class="copy-btn" onclick="copyCode(this)">
+                    <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+                    Copy
+                  </button>
+                </div>
+                <div class="code-wrap">
+                  <div class="code-block">claude</div>
+                  <button class="copy-btn" onclick="copyCode(this)">
+                    <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+                    Copy
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="fix-step">
+              <div class="fix-step-num">2.</div>
+              <div class="fix-step-content">
+                <div class="issue-fix">Reinstall the Figma MCP server:</div>
+                <div class="code-wrap">
+                  <div class="code-block">claude mcp install @figma/claude-figma</div>
+                  <button class="copy-btn" onclick="copyCode(this)">
+                    <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+                    Copy
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="fix-step">
+              <div class="fix-step-num">3.</div>
+              <div class="fix-step-content">
+                <div class="issue-fix">Re-authenticate:</div>
+                <div class="code-wrap">
+                  <div class="code-block">/mcp</div>
+                  <button class="copy-btn" onclick="copyCode(this)">
+                    <svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.2"></rect><path d="M4 2V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1" stroke="currentColor" stroke-width="1.2"></path></svg>
+                    Copy
+                  </button>
+                </div>
+                <div class="issue-note">Select Figma, press Enter, and authorize in the browser.</div>
+              </div>
+            </div>
+            <div class="tip" style="margin-top:0.6rem">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"></circle><path d="M8 7v4M8 5v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></path></svg>
+              <span>If the error persists after reinstalling, check that you have a stable internet connection and that your firewall isn't blocking Claude Code.</span>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -949,6 +1325,24 @@ All designs inside Figma should be connected at any cost.</div>
     body.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById(id).classList.add('active');
+  }
+
+  function copyCode(btn) {
+    const codeBlock = btn.previousElementSibling;
+    const text = codeBlock.textContent.trim();
+
+    navigator.clipboard.writeText(text).then(() => {
+      const originalHTML = btn.innerHTML;
+      btn.classList.add('copied');
+      btn.innerHTML = '<svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>Copied!';
+
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = originalHTML;
+      }, 2000);
+    }).catch(err => {
+      console.error('Failed to copy:', err);
+    });
   }
 </script>
 
